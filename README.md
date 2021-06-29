@@ -1,5 +1,5 @@
 # gantt-apside
-
+## A gantt chart turned into a reusable, simple and easy to follow component so you can order your task easily
 ## Project setup
 ```
 npm install
