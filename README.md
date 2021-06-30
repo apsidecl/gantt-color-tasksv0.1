@@ -1,11 +1,11 @@
 # gantt-apside
-## A gantt chart turned into a reusable, simple and easy to follow component so you can order your task easily
-## Project setup
+## A simple way to make a gantt chart for any purpose
+## Usage
 ```
-npm install
+Just go to the folder "components", copy and paste Gantt.vue
 ```
 
-### Compiles and hot-reloads for development
+### Parameters and how to setup this component
 ```
 npm run serve
 ```
