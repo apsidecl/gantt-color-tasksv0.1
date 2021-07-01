@@ -45,5 +45,6 @@ here you can see and set the real asignemnt time for the task given, also there'
 swapping for different tasks
 
 ```
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Boilerplate example
+![image](https://user-images.githubusercontent.com/58343999/124185714-4fda1880-da89-11eb-85d1-7e5ecbc984d6.png)
+
