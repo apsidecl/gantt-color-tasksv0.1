@@ -7,6 +7,7 @@
 ## Usage
 ```
 Just go to the folder "components", copy and paste Gantt.vue into your Vue project
+Remember: your project has to be SCSS support
 ```
 
 ### Parameters and how to setup this component
