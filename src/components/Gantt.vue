@@ -1,14 +1,14 @@
 <template>
   <div class="wrapper" :style="{ $numDays: 90 }">
-  <div class="filtros">
-    <span> FILTROS </span>   
-    <select v-model="cliente">
-      <option value="undefined" selected>TODOS</option>
-      <option v-for="cli in clientes" v-bind:value="cli.id" :key="cli.id">
-        {{ cli.name.toUpperCase()}}
-    </option>
-    </select>
-  </div>
+    <div class="filtros">
+      <span> FILTROS </span>
+      <select v-model="cliente">
+        <option value="undefined" selected>TODOS</option>
+        <option v-for="cli in clientes" v-bind:value="cli.id" :key="cli.id">
+          {{ cli.name.toUpperCase() }}
+        </option>
+      </select>
+    </div>
 
     <div class="gantt">
       <div class="gantt__row gantt__row--months">
@@ -49,11 +49,7 @@
             :class="{ 'holiday-line': index + 1 === 16 }"
           ></span>
         </div>
-        <div
-          class="gantt__wrapp"
-          v-for="item in ganttFiltrada"
-          :key="item.id"
-        >
+        <div class="gantt__wrapp" v-for="item in ganttFiltrada" :key="item.id">
           <div class="gantt__row">
             <div class="gantt__row-first"></div>
             <div class="gantt__row-border"></div>
@@ -113,6 +109,7 @@
 </template>
 
 <script>
+import { useAir } from '../hooks';
 export default {
   name: 'Gantt',
   computed: {
@@ -126,44 +123,43 @@ export default {
       return days;
     },
     ganttFiltrada() {
-      console.log(this.cliente)
       let listaItem = this.dataGantt.items;
-      if (this.cliente === undefined || this.cliente ==='undefined') {
-        return  listaItem;
+      if (this.cliente === undefined || this.cliente === 'undefined') {
+        return listaItem;
       } else {
-        return listaItem.filter(e => e.cliente_id === this.cliente);
+        return listaItem.filter((e) => e.cliente_id === this.cliente);
       }
     },
   },
   data: () => ({
-    inicio:0,
-    diaHoy:new Date().getDate(),
+    inicio: 0,
+    diaHoy: new Date().getDate(),
     cliente: undefined,
-    clientes: [ {
-      id: 1,
-      name: 'Alejandro Truant',
-      empresa: 'CNS',
-      empresa_id: 1
-    },
-    {
-      id: 2,
-      name: 'Paola Sanchez',
-      empresa: 'CNS',
-      empresa_id: 1
-    },
-    {
-      id: 3,
-      name: 'Samuel Nuñez',
-      empresa: 'INDH',
-      empresa_id: 2
-    },
+    clientes: [
+      {
+        id: 1,
+        name: 'Alejandro Truant',
+        empresa: 'CNS',
+        empresa_id: 1,
+      },
+      {
+        id: 2,
+        name: 'Paola Sanchez',
+        empresa: 'CNS',
+        empresa_id: 1,
+      },
+      {
+        id: 3,
+        name: 'Samuel Nuñez',
+        empresa: 'INDH',
+        empresa_id: 2,
+      },
     ],
     dataGantt: {
       items: [
         {
           id: 1,
           name: 'Kendru',
-          cliente_id: 2,
           sections: [
             {
               id: 1,
@@ -171,8 +167,8 @@ export default {
               items: [
                 {
                   id: 1,
-                  description:
-                    '<b>CCBOLSA - Sitio Privado</b> (Nombre Cliente)',
+                  cliente_id: 2,
+                  description: `<b>CCBOLSA - Sitio Privado</b> (Nombre Cliente)`,
                   color: '#015a99',
                   start: 1,
                   end: 64, //
@@ -186,6 +182,7 @@ export default {
               items: [
                 {
                   id: 1,
+                  cliente_id: 2,
                   description: null,
                   color: 'rgba(95, 174, 231, 0.8)',
                   start: 1,
@@ -200,6 +197,7 @@ export default {
               items: [
                 {
                   id: 1,
+                  cliente_id: 2,
                   description: '<b>Anexo 50</b>',
                   color: '#85BB40',
                   start: 1,
@@ -228,7 +226,6 @@ export default {
         {
           id: 2,
           name: 'Emiliano',
-          cliente_id: 2,
           sections: [
             {
               id: 1,
@@ -236,6 +233,7 @@ export default {
               items: [
                 {
                   id: 1,
+                  cliente_id: 2,
                   description:
                     '<b>CCBOLSA - Sitio Privado</b> (Nombre Cliente)',
                   color: '#015a99',
@@ -245,8 +243,8 @@ export default {
                 },
                 {
                   id: 2,
-                  description:
-                    '<b>CCBOLSA - Sitio Privado</b> (Nombre Cliente)',
+                  cliente_id: 3,
+                  description: '<b>INDH - Mapa de la memoria</b> (Samuel)',
                   color: '#015a99',
                   start: 60,
                   end: 80,
@@ -260,6 +258,7 @@ export default {
               items: [
                 {
                   id: 1,
+                  cliente_id: 2,
                   description: null,
                   color: 'rgba(95, 174, 231, 0.8)',
                   start: 32,
@@ -268,6 +267,7 @@ export default {
                 },
                 {
                   id: 2,
+                  cliente_id: 2,
                   description: null,
                   color: 'rgba(254, 189, 22, 0.7)',
                   start: 60,
@@ -282,6 +282,7 @@ export default {
               items: [
                 {
                   id: 1,
+                  cliente_id: 2,
                   description: '<b>Anexo 50</b>',
                   color: '#85BB40',
                   start: 32,
@@ -298,64 +299,7 @@ export default {
                 },
                 {
                   id: 2,
-                  description: '<b>Anexo 80</b>',
-                  color: '#85BB40',
-                  start: 60,
-                  end: 80,
-                  sub_sections: [
-                    {
-                      id: 1,
-                      description: 'Orden de Compra <b>Nº920</b>',
-                      color: '#57930A',
-                      start: 1,
-                      end: 29,
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 3,
-          name: 'Lotar',
-          cliente_id: 3,
-          sections: [
-            {
-              id: 1,
-              name: 'Asignación',
-              items: [
-                {
-                  id: 1,
-                  description:
-                    '<b>CCBOLSA - Sitio Privado</b> (Nombre Cliente)',
-                  color: '#015a99',
-                  start: 60,
-                  end: 80,
-                  sub_sections: [],
-                },
-              ],
-            },
-            {
-              id: 2,
-              name: 'Asignación real',
-              items: [
-                {
-                  id: 1,
-                  description: null,
-                  color: 'rgba(95, 174, 231, 0.8)',
-                  start: 60,
-                  end: 80,
-                  sub_sections: [],
-                },
-              ],
-            },
-            {
-              id: 3,
-              name: 'Pago',
-              items: [
-                {
-                  id: 1,
+                  cliente_id: 2,
                   description: '<b>Anexo 80</b>',
                   color: '#85BB40',
                   start: 60,
@@ -378,113 +322,254 @@ export default {
     },
     months: [
       {
-        num:1,
+        num: 1,
         name: 'Enero',
         days: 31,
         start: 2,
         end: 33,
       },
       {
-        num:2,
+        num: 2,
         name: 'Febrero',
         days: 28,
         start: 33,
         end: 61,
       },
       {
-        num:3,
+        num: 3,
         name: 'Marzo',
         days: 31,
         start: 61,
         end: 92,
       },
       {
-        num:4,
+        num: 4,
         name: 'Abril',
         days: 30,
         start: 92,
         end: 122,
       },
       {
-        num:5,
+        num: 5,
         name: 'Mayo',
         days: 31,
         start: 122,
         end: 153,
       },
       {
-        num:6,
+        num: 6,
         name: 'Junio',
         days: 30,
         start: 153,
         end: 183,
       },
       {
-        num:7,
+        num: 7,
         name: 'Julio',
         days: 31,
         start: 183,
         end: 214,
       },
       {
-        num:8,
+        num: 8,
         name: 'Agosto',
         days: 31,
         start: 214,
         end: 245,
       },
       {
-        num:9,
+        num: 9,
         name: 'Septiembre',
         days: 30,
         start: 245,
         end: 275,
       },
       {
-        num:10,
+        num: 10,
         name: 'Octubre',
         days: 31,
         start: 275,
         end: 306,
       },
       {
-        num:11,
+        num: 11,
         name: 'Noviembre',
         days: 30,
         start: 306,
         end: 336,
       },
       {
-        num:12,
+        num: 12,
         name: 'Diciembre',
         days: 31,
         start: 336,
         end: 367,
       },
     ],
-    selectedDay:0,
+    selectedDay: 0,
   }),
   mounted() {
-    console.log({ ganttFiltrada: this.ganttFiltrada });
-    console.log({ items: this.dataGantt.items });
-    console.log({ days: this.days });
-    this.calcularDia(new Date().getMonth()+1);
-
-
+    this.calcularDia(new Date().getMonth() + 1);
+    this.obtenerDatos();
   },
-  methods:{
-    calcularDia(value){
-      this.months.find(mes =>{
-        if(mes.num === value){
-          this.selectedDay = mes.start + (new Date().getDate()-2)
-          return this.selectedDay; 
+  methods: {
+    calcularDia(value) {
+      this.months.find((mes) => {
+        if (mes.num === value) {
+          this.selectedDay = mes.start + (new Date().getDate() - 2);
+          return this.selectedDay;
         }
-      })
+      });
     },
     filtrarDatos(id) {
       this.cliente = id;
+    },
+    UID(){
+      return '_' + Math.random().toString(36).substr(2, 9);
+    },
+    dateToNumber(date){
+    let dateNumber = 0
+    let numeroAsumar = 0
+    let  arrayDate = date.split("-")
+    arrayDate.shift()
+    switch(arrayDate[0]){
+        case '01':
+            numeroAsumar = 0
+        break
+        case '02':
+            numeroAsumar = 31
+        break
+        case '03':
+            numeroAsumar = 59
+        break
+        case '04':
+            numeroAsumar = 90
+        break
+        case '05':
+            numeroAsumar = 120
+        break
+        case '06':
+            numeroAsumar = 150
+        break
+        case '07':
+            numeroAsumar = 181
+        break
+        case '08':
+            numeroAsumar = 212
+        break
+        case '09':
+            numeroAsumar = 243
+        break
+        case '10':
+            numeroAsumar = 273
+        break
+        case '11':
+            numeroAsumar = 304
+        break
+        case '12':
+            numeroAsumar = 334
+        break
     }
-  }
+    dateNumber =  parseInt(arrayDate[1]) + numeroAsumar
+    return dateNumber
+},
+    transformarItems(items){
+        let item = {}
+        let innerItem = {}
+        // let obj = {}
+        for(item in items){
+          for(innerItem in items[item]){
+            console.log('en inner item')
+            console.log(items[item][innerItem])
+            let obj = {
+            id: items[item][innerItem][0]['Índice'],
+            cliente_id: items[item][innerItem][0]['Cliente (from Nombre Hito)'][0],
+            description: `${items[item][innerItem][0]['Name (from Proyecto) 2 (from Nombre Hito)']} (${items[item][innerItem][0]['Name (from Cliente) (from Proyecto) (from Nombre Hito)']})`,
+            color: '#015a99',
+            start: this.dateToNumber(`${items[item][innerItem][0]['Inicio (from Id Asignacion)']}`),
+            end: this.dateToNumber(`${items[item][innerItem][0]['Termino (from Id Asignacion)']}`),
+            sub_sections: []
+          }
+          console.log(obj)
+          items[item][innerItem] = obj
+          }
+          // console.log(items[item])
+          
+          // console.log(obj)
+          // items[item][innerItem][0] = obj
+        }
+      },
+    async obtenerDatos() {
+      const datosGantt = await useAir();
+      console.log('en datosGantt')
+      console.log(datosGantt)
+      // Agrupar asignaciones de proyectos por cada desarrollador
+      const asignaciones = datosGantt.arrayCompleto.reduce(
+        (acum, currValue) => {
+          if (currValue['Name (from Persona) (from Id Asignacion)']) {
+            acum[currValue['Name (from Persona) (from Id Asignacion)'][0]] = [
+              ...(acum[
+                currValue['Name (from Persona) (from Id Asignacion)'][0]
+              ] || []),
+              currValue,
+            ];
+          } else {
+            acum['Sin Nombre'] = [...(acum['Sin Nombre'] || []), currValue];
+          }
+          return acum;
+        },
+        {}
+      );
+
+
+
+      // Agrupar proyectos por cada asignación
+      // eslint-disable-next-line no-unused-vars
+      const proyectos = (arr) => arr.reduce(
+        (acum, currValue) => {
+          if (currValue['Name (from Proyecto) 2 (from Nombre Hito)']) {
+            acum[currValue['Name (from Proyecto) 2 (from Nombre Hito)'][0]] = [
+              ...(acum[
+                currValue['Name (from Proyecto) 2 (from Nombre Hito)'][0]
+              ] || []),
+              currValue,
+            ];
+          } else {
+            acum['Sin Proyecto'] = [...(acum['Sin Proyecto'] || []), currValue];
+          }
+          return acum;
+        },
+        {}
+      );
+
+
+      console.log({asignaciones})
+
+      const data = Object.entries(asignaciones).map(([key, value], index) => {
+        return {
+          id: index + 1,
+          name:key,
+          sections: [{
+            id:index + 1,
+            name: 'Asignación',
+            items: [
+              {
+                item:proyectos(value)
+              }
+            ]
+          }]
+        }
+      });
+      // console.log({data})
+      // const data2 = 
+      for(let i = 0; i < data.length; i++){
+        // console.log('dentro del for')
+        // console.log(data[i].sections[0].items[0])
+        this.transformarItems(data[i].sections[0].items[0])
+      }
+        console.log({data})
+    },
+  },
 };
 </script>
 
@@ -545,15 +630,13 @@ $numDays: 365;
   color: white !important;
 }
 
-
 .filtros {
-
-    margin: 10px;
-    font-family: Open Sans;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 16px;
-    /* identical to box height, or 133% */
+  margin: 10px;
+  font-family: Open Sans;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  /* identical to box height, or 133% */
   span {
     margin: 10px;
   }
@@ -563,7 +646,7 @@ $numDays: 365;
     height: 35px;
     align-items: center;
     text-align: right;
-    color: #53565A;
+    color: #53565a;
     background: rgba(83, 86, 90, 0.05);
     border-radius: 10px;
     border-color: transparent;
@@ -574,7 +657,6 @@ $numDays: 365;
     outline-offset: 0px;
     outline: none;
   }
-
 }
 
 .gantt {
